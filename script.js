@@ -1,91 +1,91 @@
 // 游戏初始化
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
-const scoreDisplay = document.getElementById('score');const   常量 scoreDisplay = document.getElementById('score')；
-const startButton = document.getElementById('startButton');const   常量 startButton = document.getElementById('startButton')；
-const restartButton = document.getElementById('restartButton');const   常量 restartButton = document.getElementById('restartButton')；
-const pauseButton = document.getElementById('pauseButton');const   常量 pauseButton =文档。
-const autoPlayButton = document.getElementById('autoPlayButton');const   常量 autoPlayButton = document.getElementById('autoPlayButton')；
-const musicToggle = document.getElementById('musicToggle');const   常量 musicToggle = document.getElementById('musicToggle')；
-const volumeControl = document.getElementById('volumeControl');const体积控制=文档。
-const speedControl = document.getElementById('speedControl');const   常量   速度控制 speedControl   速度控制 =文档。
+const scoreDisplay = document.getElementById('score');
+const startButton = document.getElementById('startButton');
+const restartButton = document.getElementById('restartButton');
+const pauseButton = document.getElementById('pauseButton');
+const autoPlayButton = document.getElementById('autoPlayButton');
+const musicToggle = document.getElementById('musicToggle');
+const volumeControl = document.getElementById('volumeControl');
+const speedControl = document.getElementById('speedControl');
 const speedValue = document.getElementById('speedValue');
-const bgMusic = document.getElementById('bgMusic');const   常量 bgMusic = document.getElementById('bgMusic')；
+const bgMusic = document.getElementById('bgMusic');
 
-let score = 0;   设score = 0；
-let snake = [];   Let    让snake   蛇 = []；
-let food = {};   让food = {}；
-let direction = 'right';   让direction = 'right'   “对”；
-let gameInterval;   让gameInterval;
-let isPaused = false;   let isPaused = false；   虚假的;
-let isAutoPlay = false;   let isAutoPlay = false；   虚假的;
-let gameSpeed = 1;   让gamesspeed = 1；
+let score = 0;
+let snake = [];
+let food = {};
+let direction = 'right';
+let gameInterval;
+let isPaused = false;
+let isAutoPlay = false;
+let gameSpeed = 1;
 
 // 初始化游戏
-function initGame() {   函数initGame() {
-    snake = [{ x: 200, y: 200 }, { x: 180, y: 200 }];Snake = [{x: 200, y: 200}, {x: 180, y: 200}]；
+function initGame() {
+    snake = [{ x: 200, y: 200 }, { x: 180, y: 200 }];
     generateFood();
-    score = 0;   得分= 0；
-    scoreDisplay.textContent = score;scoreDisplay。textContent = score；   分数;
-    direction = 'right';   方向= ‘右’；
-    isPaused = false;   isPaused = false；   虚假的;
-    isAutoPlay = false;   isAutoPlay = false；   虚假的;
-    gameSpeed = 1;   gamesspeed = 1；
-    speedControl.value = gameSpeed;转速控制。value = gamesspeed；
-    speedValue.textContent = `${gameSpeed.toFixed(1)}x`;speedValue。textContent = ' ${gameSpeed.toFixed(1)}x '；
+    score = 0;
+    scoreDisplay.textContent = score;
+    direction = 'right';
+    isPaused = false;
+    isAutoPlay = false;
+    gameSpeed = 1;
+    speedControl.value = gameSpeed;
+    speedValue.textContent = `${gameSpeed.toFixed(1)}x`;
 }
 
 // 生成食物
-function 函数generateFood() {generateFood() {
-    food = {   食物= {
-        x: Math.floor(Math.random() * 20) * 20,x: Math   数学.floor   地板上(数学。随机（）* 20)* 20，
-        y: Math.floor(Math.random() * 20) * 20y: Math   数学.floor   地板上(数学。Random () * 20) * 20
+function generateFood() {
+    food = {
+        x: Math.floor(Math.random() * 20) * 20,
+        y: Math.floor(Math.random() * 20) * 20
     };
 }
 
 // 绘制蛇和食物
-function    函数drawGame() {drawGame() {
+function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // 绘制蛇身渐变颜色
-    snake.forEach((segment, index) => {蛇。forEach((segment   段, index   指数) => {
-        if (index !== 0) {   If    如果（index   (索引 !）== 0) {
-            const gradient = ctx.createLinearGradient(segment.x, segment.y, segment.x + 20, segment.y + 20);const   常量   梯度 gradient   梯度 = ctx. createlineeargradient (segment。x   段。x,段。y,段。x20，分段。y 20);
+    snake.forEach((segment, index) => {
+        if (index !== 0) {
+            const gradient = ctx.createLinearGradient(segment.x, segment.y, segment.x + 20, segment.y + 20);
             gradient.addColorStop(0, '#00ff00'); // 头部颜色
             gradient.addColorStop(1, '#006400'); // 尾部颜色
-            ctx.fillStyle = gradient;   ctx.fillStyle = gradient；
-            ctx.fillRect(segment.x, segment.y, 20, 20);ctx.fillRect (segment   段.x段。Y, 20,20)；
+            ctx.fillStyle = gradient;
+            ctx.fillRect(segment.x, segment.y, 20, 20);
         }
     });
     
     // 绘制食物
-    const foodImage = new Image();const   常量 fooimage = new   新    图像Image   图像()；
-    foodImage.src = '/Web-game-eat-Doro/food-doro.png';foodImage。src = './food-doro.png'“/ Web   网络-game   游戏-eat   吃-Doro   氯 / food   食物-doro   氯.png”；
-    ctx.drawImage(foodImage, food.x, food.y, 20, 20);ctx。drawImage (foodImage食物。x,食物。Y, 20,20)；
+    const foodImage = new Image();
+    foodImage.src = './Web-game-eat-Doro/food-doro.png';
+    ctx.drawImage(foodImage, food.x, food.y, 20, 20);
     
     // 绘制蛇头
-    const headImage = new Image();const   常量 headImage = new   新    图像Image   图像()；
-    headImage.src = '/Web-game-eat-Doro/headcapture.png';headImage。src = './headcapture.png'“/ Web   网络-game   游戏-eat   吃-Doro   氯 / headcapture.png”；
-    const head = snake[0];   Const    常量head   头 = snake   蛇[0]；
-    ctx.drawImage(headImage, head.x - 18, head.y - 18, 54, 54);ctx。drawImage (headImage头。X - 18，头部。Y - 18, 54, 54)；
+    const headImage = new Image();
+    headImage.src = './Web-game-eat-Doro/headcapture.png';
+    const head = snake[0];
+    ctx.drawImage(headImage, head.x - 18, head.y - 18, 54, 54);
 }
 
 // 移动蛇
-function    函数moveSnake() {moveSnake() {
-    const head = { ...snake[0] };   Const    常量head   头 ={…蛇[0]};
+function moveSnake() {
+    const head = { ...snake[0] };
     if (isAutoPlay) {
-        direction = findBestPath();direction   方向 = findBestPath()；
+        direction = findBestPath();
     }
-    switch (direction) {   开关（方向）{
-        case 'up': head.y -= 20; break;Case    情况下'up'   “了”：头。Y -= 20；打破;
-        Case 'down'：头。Y = 20；打破;case 'down': head.y += 20; break;Case    情况下'down'   “下来”：Y = 20；Case 'down'   “下来”：头。Y = 20；打破;
-        左：头。X -= 20；打破;case 'left': head.x -= 20; break;
-        case 'right': head.x += 20; break;案例“右”：头部。X = 20；打破;
+    switch (direction) {
+        case 'up': head.y -= 20; break;
+        case 'down': head.y += 20; break;
+        case 'left': head.x -= 20; break;
+        case 'right': head.x += 20; break;
     }
-    snake.unshift(head);   snake   蛇.unshift   平移(头);
-    if (head.x === food.x && head.y === food.y) {如果(头。X ==食物。X头。Y ==食物。y) {
-        score += 10;   得分= 10；
-        scoreDisplay.textContent = score;scoreDisplay。textContent = score；
+    snake.unshift(head);
+    if (head.x === food.x && head.y === food.y) {
+        score += 10;
+        scoreDisplay.textContent = score;
         generateFood();
     } else {
         snake.pop();
@@ -93,16 +93,16 @@ function    函数moveSnake() {moveSnake() {
 }
 
 // 寻找最佳路径
-function 函数findBestPath() {findBestPath() {
-    const head = snake[0];   Const    常量head   头 = snake   蛇[0]；
+function findBestPath() {
+    const head = snake[0];
     const possibleDirections = ['up', 'down', 'left', 'right'];
     const safeDirections = possibleDirections.filter(dir => {
-        const newHead = { ...head };   const   常量 newHead ={…头};
-        switch (dir) {   Switch (dir) {
-            case 'up': newHead.y -= 20; break;case   情况下 'up'   “了”: newHead。Y -= 20；打破;
-            case 'down': newHead.y += 20; break;case   情况下 'down'   “下来”: newHead。Y = 20；打破;
-            case 'left': newHead.x -= 20; break;case   情况下 'left'   “左”: newHead。X -= 20；打破;
-            case 'right': newHead.x += 20; break;case   情况下 'right'   “对”: newHead。X = 20；打破;
+        const newHead = { ...head };
+        switch (dir) {
+            case 'up': newHead.y -= 20; break;
+            case 'down': newHead.y += 20; break;
+            case 'left': newHead.x -= 20; break;
+            case 'right': newHead.x += 20; break;
         }
         // 检查是否撞墙或撞到自己
         if (newHead.x < 0 || newHead.x >= canvas.width || newHead.y < 0 || newHead.y >= canvas.height) {

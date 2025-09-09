@@ -60,12 +60,12 @@ function drawGame() {
     
     // 绘制食物
     const foodImage = new Image();
-    foodImage.src = './food-doro.png';
+    foodImage.src = '/Web-game-eat-Doro/food-doro.png';
     ctx.drawImage(foodImage, food.x, food.y, 20, 20);
     
     // 绘制蛇头
     const headImage = new Image();
-    headImage.src = './headcapture.png';
+    headImage.src = '/Web-game-eat-Doro/headcapture.png';
     const head = snake[0];
     ctx.drawImage(headImage, head.x - 18, head.y - 18, 54, 54);
 }

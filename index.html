@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>贪吃蛇游戏</title>
+    <link rel="stylesheet" href="/Web-game-eat-Doro/style.css">
+</head>
+<body>
+    <audio id="bgMusic" loop>
+        <source src="/Web-game-eat-Doro/孤高曼波 - Lalala (赛马娘版).mp3" type="audio/mpeg">
+        您的浏览器不支持音频元素。
+    </audio>
+    <div class="left-panel">
+        <div class="direction-controls">
+            <button class="direction-btn" id="upBtn" ontouchstart="handleTouch('up')" ontouchend="handleTouchEnd()">↑</button>
+            <div class="direction-row">
+                <button class="direction-btn" id="leftBtn" ontouchstart="handleTouch('left')" ontouchend="handleTouchEnd()">←</button>
+                <button class="direction-btn" id="rightBtn" ontouchstart="handleTouch('right')" ontouchend="handleTouchEnd()">→</button>
+            </div>
+            <button class="direction-btn" id="downBtn" ontouchstart="handleTouch('down')" ontouchend="handleTouchEnd()">↓</button>
+        </div>
+    </div>
+    <div class="center-panel">
+        <h1 class="game-title">贪吃蛇</h1>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+    </div>
+    <div class="right-panel">
+        <div class="score-display">分数: <span id="score">0</span></div>
+        <div class="game-controls">
+            <button id="startButton">开始/重新开始</button>
+            <button id="pauseButton">暂停/继续</button>
+            <button id="autoPlayButton">电脑托管</button>
+            <div class="music-controls">
+                <button id="musicToggle">播放音乐</button>
+                <input type="range" id="volumeControl" min="0" max="1" step="0.1" value="0.3">
+            </div>
+            <div class="speed-control">
+                <span>倍速:</span>
+                <input type="range" id="speedControl" min="0.1" max="10" step="0.1" value="1">
+                <span id="speedValue">1.0x</span>
+            </div>
+        </div>
+    </div>
+    <script src="/Web-game-eat-Doro/script.js"></script>
+</body>
+</html>

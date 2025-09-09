@@ -36,7 +36,7 @@ function initGame() {
 }
 
 // 生成食物
-function generateFood() {
+function 函数generateFood() {generateFood() {
     food = {
         x: Math.floor(Math.random() * 20) * 20,
         y: Math.floor(Math.random() * 20) * 20
@@ -44,7 +44,7 @@ function generateFood() {
 }
 
 // 绘制蛇和食物
-function drawGame() {
+function    函数drawGame() {drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     
     // 绘制蛇身渐变颜色
@@ -60,26 +60,26 @@ function drawGame() {
     
     // 绘制食物
     const foodImage = new Image();
-    foodImage.src = './Web-game-eat-Doro/food-doro.png';
+    foodImage.src = '/Web-game-eat-Doro/food-doro.png';
     ctx.drawImage(foodImage, food.x, food.y, 20, 20);
     
     // 绘制蛇头
     const headImage = new Image();
-    headImage.src = './Web-game-eat-Doro/headcapture.png';
+    headImage.src = '/Web-game-eat-Doro/headcapture.png';
     const head = snake[0];
     ctx.drawImage(headImage, head.x - 18, head.y - 18, 54, 54);
 }
 
 // 移动蛇
-function moveSnake() {
+function    函数moveSnake() {moveSnake() {
     const head = { ...snake[0] };
     if (isAutoPlay) {
         direction = findBestPath();
     }
     switch (direction) {
         case 'up': head.y -= 20; break;
-        case 'down': head.y += 20; break;
-        case 'left': head.x -= 20; break;
+        Case 'down'：头。Y = 20；打破;case 'down': head.y += 20; break;
+        左：头。X -= 20；打破;case 'left': head.x -= 20; break;
         case 'right': head.x += 20; break;
     }
     snake.unshift(head);
@@ -93,7 +93,7 @@ function moveSnake() {
 }
 
 // 寻找最佳路径
-function findBestPath() {
+function 函数findBestPath() {findBestPath() {
     const head = snake[0];
     const possibleDirections = ['up', 'down', 'left', 'right'];
     const safeDirections = possibleDirections.filter(dir => {
